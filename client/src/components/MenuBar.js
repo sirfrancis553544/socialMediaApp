@@ -15,7 +15,7 @@ function MenuBar() {
         active={activeItem === "home"}
         onClick={handleItemClick}
         as={Link}
-        to={"/"}
+        to="/"
       />
 
       <Menu.Menu position="right">
@@ -24,14 +24,14 @@ function MenuBar() {
           active={activeItem === "login"}
           onClick={handleItemClick}
           as={Link}
-          to={"/login"}
+          to="/login"
         />
         <Menu.Item
           name="register"
           active={activeItem === "register"}
           onClick={handleItemClick}
           as={Link}
-          to={"/register"}
+          to="/register"
         />
       </Menu.Menu>
     </Menu>
