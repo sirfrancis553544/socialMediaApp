@@ -24,4 +24,4 @@ mongoose
   });
 
 // ! run server: node index
-// ! nodemon: npm start
+// ! nodemon: cd into client then npm start

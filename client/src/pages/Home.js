@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Grid, Transition } from 'semantic-ui-react';
-
-import { AuthContext } from '../context/auth';
+// import gql from "graphql";
+// import { AuthContext } from '../context/auth';
 import PostCard from '../components/PostCard';
 // import PostForm from '../components/PostForm';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
@@ -13,7 +13,7 @@ function Home() {
     loading,
     data: { getPosts: posts }
   } = useQuery(FETCH_POSTS_QUERY);
-
+  // console.trace(data)
   return (
     <Grid columns={3}>
       <Grid.Row className="page-title">
