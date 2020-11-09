@@ -8,7 +8,7 @@ import PostCard from '../components/PostCard';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
 
 function Home() {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(); //AuthContext
   const {
     loading,
     data: { getPosts: posts }
@@ -22,7 +22,7 @@ function Home() {
       <Grid.Row>
         {user && (
           <Grid.Column>
-            <PostForm />
+            {/* <PostForm /> */}
           </Grid.Column>
         )}
         {loading ? (
