@@ -33,23 +33,26 @@ module.exports = {
       }
 
       const user = await User.findOne({ username });
+
       if (!user) {
         errors.general = "User not found";
         throw new UserInputError("User not found", { errors });
       }
+
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        errors.general = "Wrong credentials";
-        throw new UserInputError("Wrong credentials", { errors });
+        errors.general = "Wrong crendetials";
+        throw new UserInputError("Wrong crendetials", { errors });
       }
+
       const token = generateToken(user);
+
       return {
         ...user._doc,
         id: user._id,
         token,
       };
     },
-
     async register(
       _,
       { registerInput: { username, email, password, confirmPassword } }
@@ -64,8 +67,7 @@ module.exports = {
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
-
-      // Make sure user doesn't already exist
+      // TODO: Make sure user doesnt already exist
       const user = await User.findOne({ username });
       if (user) {
         throw new UserInputError("Username is taken", {
@@ -74,8 +76,7 @@ module.exports = {
           },
         });
       }
-
-      //  Hash password and create an auth token
+      // hash password and create an auth token
       password = await bcrypt.hash(password, 12);
 
       const newUser = new User({
@@ -84,6 +85,7 @@ module.exports = {
         password,
         createdAt: new Date().toISOString(),
       });
+
       const res = await newUser.save();
 
       const token = generateToken(res);
@@ -94,13 +96,5 @@ module.exports = {
         token,
       };
     },
-
-
-
-
-
-
-
-    
   },
 };

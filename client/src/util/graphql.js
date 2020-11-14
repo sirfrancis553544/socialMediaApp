@@ -1,9 +1,8 @@
 import gql from "graphql-tag";
 
-// added in the word query 
 export const FETCH_POSTS_QUERY = gql`
   {
-    query { 
+    getPosts {
       id
       body
       createdAt

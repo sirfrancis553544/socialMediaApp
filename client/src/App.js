@@ -16,7 +16,7 @@ import SinglePost from "./pages/SinglePost";
 
 function App() {
   return (
-    <AuthProvider> 
+    <AuthProvider>
       <Router>
         <Container>
           <MenuBar />

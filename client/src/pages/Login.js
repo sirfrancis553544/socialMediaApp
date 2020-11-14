@@ -9,6 +9,7 @@ import { useForm } from "../util/hooks";
 function Login(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
+
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     username: "",
     password: "",
@@ -31,7 +32,7 @@ function Login(props) {
 
   return (
     <div className="form-container">
-      <Form onSubmit={onSubmit} onValidate className={loading ? "loading" : ""}>
+      <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <h1>Login</h1>
         <Form.Input
           label="Username"
@@ -58,15 +59,16 @@ function Login(props) {
       {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => {
-              <li key={value}>{value}</li>;
-            })}
+            {Object.values(errors).map((value) => (
+              <li key={value}>{value}</li>
+            ))}
           </ul>
         </div>
       )}
     </div>
   );
 }
+
 const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {

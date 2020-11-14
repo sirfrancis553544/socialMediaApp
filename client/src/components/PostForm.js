@@ -11,24 +11,58 @@ function PostForm() {
     body: "",
   });
 
+  // const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  //   variables: values,
+  //   update(proxy, result) {
+  //     const data = proxy.readQuery({
+  //       query: FETCH_POSTS_QUERY,
+  //     });
+  //     data.getPosts = [result.data.createPost, ...data.getPosts];
+  //     proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
+  //     values.body = "";
+  //   },
+  // });
+
+  // const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  //   variables: values,
+  //   update(proxy, result) {
+  //     const data = proxy.readQuery({
+  //       query: FETCH_POSTS_QUERY,
+  //     });
+  //     proxy.writeQuery({
+  //       query: FETCH_POSTS_QUERY,
+  //       data: {
+  //         getPosts: [result.data.createPost, ...data.getPosts],
+  //       },
+  //     });
+  //     values.body = "";
+  //   },
+  // });
+
+
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
+        query: FETCH_POSTS_QUERY
       });
       data.getPosts = [result.data.createPost, ...data.getPosts];
-      proxy.writeQuery({ query: FETCH_POSTS_QUERY, data });
-      values.body = "";
-    },
-  });
+      proxy.writeQuery({
+        query: FETCH_POSTS_QUERY,
+        data: {
+          getPosts: [result.data.createPost, ...data.getPosts],
+        },
+      });
+      values.body = '';
+    }
+  })
 
   function createPostCallback() {
     createPost();
   }
+
   return (
     <>
-      {" "}
       <Form onSubmit={onSubmit}>
         <h2>Create a post:</h2>
         <Form.Field>

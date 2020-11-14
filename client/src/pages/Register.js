@@ -34,7 +34,7 @@ function Register(props) {
 
   return (
     <div className="form-container">
-      <Form onSubmit={onSubmit} onValidate className={loading ? "loading" : ""}>
+      <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <h1>Register</h1>
         <Form.Input
           label="Username"
@@ -79,15 +79,16 @@ function Register(props) {
       {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => {
-              <li key={value}>{value}</li>;
-            })}
+            {Object.values(errors).map((value) => (
+              <li key={value}>{value}</li>
+            ))}
           </ul>
         </div>
       )}
     </div>
   );
 }
+
 const REGISTER_USER = gql`
   mutation register(
     $username: String!
