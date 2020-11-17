@@ -30,7 +30,7 @@ module.exports = {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
 
-      if (body.trim() === "") {
+      if (body.trim() === " ") {
         throw new Error("Post body must not be empty");
       }
 
@@ -85,9 +85,9 @@ module.exports = {
       } else throw new UserInputError("Post not found");
     },
   },
-  Subscription: {
-    newPost: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("NEW_POST"),
-    },
-  },
+  // Subscription: {
+  //   newPost: {
+  //     subscribe: (_, __, { pubsub }) => pubsub.asyncIterator("NEW_POST"),
+  //   },
+  // },
 };

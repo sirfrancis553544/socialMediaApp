@@ -24,9 +24,9 @@ function SinglePost(props) {
 
   const [comment, setComment] = useState("");
 
-  const {
-    data: { getPost },
-  } = useQuery(FETCH_POST_QUERY, {
+  
+
+ const { loading, data: { getPost} = {} } = useQuery(FETCH_POST_QUERY, {
     variables: {
       postId,
     },
@@ -46,7 +46,6 @@ function SinglePost(props) {
   function deletePostCallback() {
     props.history.push("/");
   }
-
 
   let postMarkup;
   if (!getPost) {
